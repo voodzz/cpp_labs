@@ -26,9 +26,9 @@ void makeFareySequence (int& n) {
     int c = 1;
     int d = n;
     if (d != 1) {
-        std::cout << "The Farey sequence: " << a << '/' << b << ", " << c << '/' << d << ", ";
+        std::cout << "The Farey sequence: " << a << '/' << b << ", ";
     } else {
-        std::cout << "The Farey sequence: " << a << '/' << b << ", " << c << '/' << d << '\n';
+        std::cout << "The Farey sequence: " << a << '/' << b << "\n";
     }
     int q = d;
     while (q != 1) {
@@ -41,7 +41,7 @@ void makeFareySequence (int& n) {
         d = q;
         if (q == 1) {
             std::cout << p << '/' << q << '\n';
-        } else {
+        } else if (q != n) {
             std::cout << p << '/' << q << ", ";
         }
     }

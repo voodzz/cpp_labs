@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/rusik/CLionProjects/lab04/task5
+# Install script for directory: C:/Task_Bar/Two/Studying/Programming/cpp_labs/cppLabs/Lab_04_Functions/task5
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/rusik/CLionProjects/lab04/task5/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Task_Bar/Two/Studying/Programming/cpp_labs/cppLabs/Lab_04_Functions/task5/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

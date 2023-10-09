@@ -27,7 +27,7 @@
 					[
 						0
 					],
-					"name" : "task7",
+					"name" : "task8",
 					"targetIndexes" : 
 					[
 						0
@@ -38,9 +38,9 @@
 			[
 				{
 					"directoryIndex" : 0,
-					"id" : "task7::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-task7-Debug-67d1e1953f0edd019116.json",
-					"name" : "task7",
+					"id" : "task8::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-task8-Debug-35d1797e6110fca3c791.json",
+					"name" : "task8",
 					"projectIndex" : 0
 				}
 			]
@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/rusik/CLionProjects/lab04/task7/cmake-build-debug",
-		"source" : "C:/Users/rusik/CLionProjects/lab04/task7"
+		"build" : "C:/Task_Bar/Two/Studying/Programming/cpp_labs/cppLabs/Lab_04_Functions/task8/cmake-build-debug",
+		"source" : "C:/Task_Bar/Two/Studying/Programming/cpp_labs/cppLabs/Lab_04_Functions/task8"
 	},
 	"version" : 
 	{

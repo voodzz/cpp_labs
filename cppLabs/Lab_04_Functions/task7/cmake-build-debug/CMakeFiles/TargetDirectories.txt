@@ -1,3 +1,0 @@
-C:/Task_Bar/Two/Studying/Programming/cpp_labs/cppLabs/Lab_04_Functions/task7/cmake-build-debug/CMakeFiles/task7.dir
-C:/Task_Bar/Two/Studying/Programming/cpp_labs/cppLabs/Lab_04_Functions/task7/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Task_Bar/Two/Studying/Programming/cpp_labs/cppLabs/Lab_04_Functions/task7/cmake-build-debug/CMakeFiles/rebuild_cache.dir

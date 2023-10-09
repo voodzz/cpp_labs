@@ -90,6 +90,11 @@ StyleCopReport.xml
 *.vcxproj
 *.sln
 
+# CLion files
+cmake-build-debug
+.idea/*
+*.txt
+
 # Chutzpah Test files
 _Chutzpah*
 

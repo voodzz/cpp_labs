@@ -2,6 +2,13 @@
  * Проверить, является ли он перестановкой, то есть содержит различные числа от 1 до n.
  */
 
+/** Input           Output
+ *  1 2 3 4         The vector is a permutation.
+ *  2 3 1 5 4       The vector is a permutation.
+ *  1 2 2           The vector is not a permutation.
+ *  1 3 4           The vector is not a permutation.
+ */
+
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -20,7 +27,7 @@ int main () {
 
 size_t readUnsignedIntFromConsole(const std::string& label) {
     std::cout << label;
-    int n;
+    size_t n;
     std::cin >> n;
     return n;
 }

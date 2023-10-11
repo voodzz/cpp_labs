@@ -3,6 +3,17 @@
  * Подумайте, над возможностью использования контейнеров std::map, std::set.
  */
 
+/** Input           Output
+ *  541             0
+ *  -541            0
+ *  -1              0
+ *  10              2
+ *  11              2
+ *  -10             2
+ *  1002            3
+ *  12345607        8
+ */
+
 #include <iostream>
 #include <set>
 
@@ -24,7 +35,7 @@ int readNumberFromConsole(const std::string& label) {
 
 void findMinDigitThatIsNotInTheNumber(int& number) {
     std::set<int> digits;
-    int tmp = number;
+    int tmp = std::abs(number);
     while (tmp) {
         int digit = tmp % 10;
         digits.insert(digit);

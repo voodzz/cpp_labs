@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 size_t readUnsignedIntFromConsole(const std::string&);
 void readVectorFromConsole(std::vector<int>& vector);
@@ -33,9 +34,9 @@ void readVectorFromConsole(std::vector<int>& vector) {
 }
 
 void rearrangeElementsOfTheVector (std::vector<int>& vector, size_t& n, size_t& m) {
-    for (size_t i = n; i != n + m; ++i) {
-        std::swap(vector[i], vector[i - n]);
-    }
+    std::reverse(vector.begin(), vector.end());
+    std::reverse(vector.begin(), vector.end() - n);
+    std::reverse(vector.begin() + m, vector.end());
     std::cout << "The rearranged vector: ";
     for (auto& element : vector) {
         std::cout << element << ' ';

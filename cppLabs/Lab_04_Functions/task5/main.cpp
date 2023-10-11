@@ -2,13 +2,22 @@
  * массивов поменять в нём местами начало длины n и конец длины m.
  */
 
+/** Input                       Output
+ *  vector              n
+ *  1 2 3 4 5 6         2       3 4 5 6 1 2
+ *  1 2 3 4             0       1 2 3 4
+ *  1 2 3 4 5 6         5       6 1 2 3 4 5
+ *  1 2 3 4             2       3 4 1 2
+ *  1 2 3 4             4       1 2 3 4
+ */
+
 #include <iostream>
 #include <vector>
 #include <algorithm>
 
 size_t readUnsignedIntFromConsole(const std::string&);
 void readVectorFromConsole(std::vector<int>& vector);
-void rearrangeElementsOfTheVector(std::vector<int>& vector, size_t& n, size_t&m);
+void rearrangeElementsOfTheVector(std::vector<int>& vector, size_t& n, size_t& m);
 
 int main () {
     size_t n = readUnsignedIntFromConsole("Enter the value of n: ");

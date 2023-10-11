@@ -1,4 +1,27 @@
-/**Дано два возрастающих массива. Найти количество общих элементов в них.
+/**
+ * Дано два возрастающих массива. Найти количество общих элементов в них.
+ */
+
+/** Input               Output
+ *  1 2 3 4
+ *  and                 4
+ *  1 2 3 4 5
+ *
+ *  2 1
+ *  and                 0
+ *  empty vector
+ *
+ *  empty vector
+ *  and                 0
+ *  empty vector
+ *
+ *  1 1 1
+ *  and                 1
+ *  1
+ *
+ *  1 2 3 4
+ *  and                 0
+ *  5 6 7 8
  */
 
 #include <iostream>
@@ -7,7 +30,7 @@
 
 size_t readUnsignedIntFromConsole(const std::string&);
 void readVectorFromConsole(std::vector<int>& vector);
-void countCommonElements(std::vector<int>& vector1, std::vector<int>& vector2);
+void countCommonElements(const std::vector<int>& vector1, const std::vector<int>& vector2);
 
 int main () {
     size_t n = readUnsignedIntFromConsole("Enter the size of the first vector: ");
@@ -35,7 +58,7 @@ void readVectorFromConsole(std::vector<int>& vector) {
     }
 }
 
-void countCommonElements(std::vector<int>& vector1, std::vector<int>& vector2) {
+void countCommonElements(const std::vector<int>& vector1, const std::vector<int>& vector2) {
     std::set<int> newVector1;
     for(auto& element : vector1) {
         newVector1.insert(element);

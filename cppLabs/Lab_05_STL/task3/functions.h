@@ -1,0 +1,4 @@
+#ifndef TASK3_FUNCTIONS_H
+#define TASK3_FUNCTIONS_H
+
+#endif //TASK3_FUNCTIONS_H

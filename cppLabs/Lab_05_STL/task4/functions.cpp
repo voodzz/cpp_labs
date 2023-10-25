@@ -13,14 +13,6 @@ void readInput(const std::string& filePath,
     fin.close();
 }
 
-/*void printOutput(const std::string& filePath,
-                 const std::vector<std::pair<std::string, std::string>>& inputVector) {
-    std::ofstream output(filePath, std::ios::out);
-    for (const auto& element : inputVector) {
-        output << element.first << ' ' << element.second << '\n';
-    };
-}*/
-
 void findSubstringAndPrintOutput(const std::string& filePath,
                                  const std::vector<std::pair<std::string, std::string>>& inputVector) {
     std::ofstream output(filePath, std::ios::out);

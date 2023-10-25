@@ -9,8 +9,5 @@
 void readInput(const std::string& filePath,
                std::vector<std::pair<std::string, std::string>>& inputVector);
 
-/*void printOutput(const std::string& filePath,
-                 const std::vector<std::pair<std::string, std::string>>& inputVector);*/
-
 void findSubstringAndPrintOutput(const std::string& filePath,
                                  const std::vector<std::pair<std::string, std::string>>& inputVector);

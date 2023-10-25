@@ -38,7 +38,7 @@ std::string removePunctuationMarks(std::string& input) {
 
 std::map<std::string, int> findWords(std::string& text) {
     std::map<std::string, int> dictionary;
-    while (text.size()) {
+    while (!text.empty()) {
         std::string str;
         int counter = 0;
         for (char symbol : text) {

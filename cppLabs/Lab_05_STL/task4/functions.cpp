@@ -21,7 +21,7 @@ void findSubstringAndPrintOutput(const std::string& filePath,
         if (n != std::string::npos) {
             output << "YES  " << n << '\n';
         } else {
-            output << "NO " << -1 << '\n';
+            output << "NO   " << -1 << '\n';
         }
 
     }

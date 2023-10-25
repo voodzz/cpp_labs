@@ -10,4 +10,4 @@
 std::string readInput(const std::string& filePath);
 std::string removePunctuationMarks(std::string& input);
 std::map<std::string, int> findWords(std::string& text);
-void printResult(const std::string& filePath, std::map<std::string, int> result);
+void printResult(const std::string& filePath, const std::map<std::string, int>& result);

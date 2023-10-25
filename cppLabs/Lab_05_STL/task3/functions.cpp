@@ -55,7 +55,7 @@ std::map<std::string, int> findWords(std::string& text) {
     return dictionary;
 }
 
-void printResult(const std::string& filePath, std::map<std::string, int> result) {
+void printResult(const std::string& filePath, const std::map<std::string, int>& result) {
     std::ofstream output(filePath, std::ios::out);
     for (const auto& [word, number] : result) {
         output << "The number of times the word \"" << word << "\" has occurred in the text is: "

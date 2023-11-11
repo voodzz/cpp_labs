@@ -8,7 +8,7 @@ struct Country {
     std::string name;
     std::string code;
     std::map<int, long long int> yearPopulation;
-    std::string toString();
+    std::string toString() const;
 };
 
 #endif //LAB_07_STRUCTCLASS_COUNTRY_H

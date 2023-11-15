@@ -8,16 +8,17 @@
 #include <fstream>
 #include "iodata.h"
 
-long int bubbleCounter = 0;
+long int bubbleCounterComparisons = 0;
+long int bubbleCounterSwaps = 0;
 template<typename T>
 void bubbleSort(std::vector<T>& a) {
     auto start = std::chrono::system_clock::now();
     for (int i = 0; i < a.size(); ++i) {
         for (int j = a.size() - 1; j > i; --j) {
-            ++::bubbleCounter;
+            ++::bubbleCounterComparisons;
             if (a[j - 1] > a[j]) {
                 std::swap(a[j - 1], a[j]);
-                ++::bubbleCounter;
+                ++::bubbleCounterSwaps;
             }
         }
     }
@@ -26,7 +27,8 @@ void bubbleSort(std::vector<T>& a) {
     chronoOutToFile(start, end, "CMakeFiles/data/output.txt", "Bubble Sort", size);
 }
 
-long int selectionCounter = 0;
+long int selectionCounterComparisons = 0;
+long int selectionCounterSwaps = 0;
 template<typename T>
 void selectionSort(std::vector<T>& a) {
     auto start = std::chrono::system_clock::now();
@@ -36,28 +38,30 @@ void selectionSort(std::vector<T>& a) {
         max = a[0];
         iMax = 0;
         for (size_t j = 0; j <= i; ++j) {
-            ++::selectionCounter;
+            ++::selectionCounterComparisons;
             if (max < a[j]) {
                 max = a[j];
                 iMax = j;
             }
         }
         std::swap(a[iMax], a[i]);
-        ++::selectionCounter;
+        ++::selectionCounterSwaps;
     }
     auto end = std::chrono::system_clock::now();
     size_t size = a.size();
     chronoOutToFile(start, end, "CMakeFiles/data/output.txt", "Selection Sort", size);
 }
 
-long int insertionCounter = 0;
+long int insertionCounterComparisons = 0;
+long int insertionCounterSwaps = 0;
 template<typename T>
 void insertionSort (std::vector<T>& a) {
     auto start = std::chrono::system_clock::now();
     for (size_t i = 1; i != a.size(); ++i) {
         for (size_t j = i; j > 0 && a[j - 1] > a[j]; --j) {
+            ++::insertionCounterComparisons;
             std::swap(a[j - 1], a[j]);
-            ++::insertionCounter;
+            ++::insertionCounterSwaps;
         }
     }
     auto end = std::chrono::system_clock::now();
@@ -65,7 +69,8 @@ void insertionSort (std::vector<T>& a) {
     chronoOutToFile(start, end, "CMakeFiles/data/output.txt", "Insertion Sort", size);
 }
 
-long int shellCounter = 0;
+long int shellCounterComparisons = 0;
+long int shellCounterSwaps = 0;
 template<typename T>
 void shellSort (std::vector<T>& a) {
     auto start = std::chrono::system_clock::now();
@@ -75,10 +80,11 @@ void shellSort (std::vector<T>& a) {
             size_t j;
             for (j = i; j >= gap && a[j - gap] > tmp; j -= gap) {
                 a[j] = a[j - gap];
-                ++::shellCounter;
+                ++::shellCounterSwaps;
+                ++::shellCounterComparisons;
             }
             a[j] = tmp;
-            ++::shellCounter;
+            ++::shellCounterSwaps;
         }
     }
     auto end = std::chrono::system_clock::now();
@@ -86,7 +92,8 @@ void shellSort (std::vector<T>& a) {
     chronoOutToFile(start, end, "CMakeFiles/data/output.txt", "Shell Sort", size);
 }
 
-int cocktailCounter = 0;
+long int cocktailCounterComparisons = 0;
+long int cocktailCounterSwaps = 0;
 template<typename T>
 void cocktailSort(std::vector<T>& a) {
     auto start = std::chrono::system_clock::now();
@@ -96,10 +103,10 @@ void cocktailSort(std::vector<T>& a) {
     while (!isSorted) {
         isSorted = true;
         for (size_t i = left; i != right; ++i) {
-            ++::cocktailCounter;
+            ++::cocktailCounterComparisons;
             if (a[i] > a[i + 1]){
                 std::swap(a[i], a[i + 1]);
-                ++::cocktailCounter;
+                ++::cocktailCounterSwaps;
                 isSorted = false;
             }
         }
@@ -109,10 +116,10 @@ void cocktailSort(std::vector<T>& a) {
         right--;
         isSorted = true;
         for (size_t i = right - 1; i != left - 1; --i) {
-            ++::cocktailCounter;
+            ++::cocktailCounterComparisons;
             if (a[i] > a[i + 1]) {
                 std::swap(a[i], a[i + 1]);
-                ++cocktailCounter;
+                ++cocktailCounterSwaps;
                 isSorted = false;
             }
         }
@@ -123,7 +130,8 @@ void cocktailSort(std::vector<T>& a) {
     chronoOutToFile(start, end, "CMakeFiles/data/output.txt", "Cocktail Sort", size);
 }
 
-int combCounter = 0;
+long int combCounterComparisons = 0;
+long int combCounterSwaps = 0;
 template<typename T>
 void combSort(std::vector<T>& a) {
     auto start = std::chrono::system_clock::now();
@@ -131,10 +139,10 @@ void combSort(std::vector<T>& a) {
     size_t step = a.size() - 1;
     while (step >= 1) {
         for (int i = 0; i + step < a.size(); ++i) {
-            ++::combCounter;
+            ++::combCounterComparisons;
             if (a[i] > a[i + step]) {
                 std::swap(a[i], a[i + step]);
-                ++combCounter;
+                ++combCounterSwaps;
             }
         }
         step /= factor;
@@ -144,7 +152,8 @@ void combSort(std::vector<T>& a) {
     chronoOutToFile(start, end, "CMakeFiles/data/output.txt", "Comb Sort", size);
 }
 
-long int doubleSelectionCounter = 0;
+long int doubleSelectionCounterComparisons = 0;
+long int doubleSelectionCounterSwaps = 0;
 template<typename T>
 void doubleSelectionSort(std::vector<T>& a) {
     auto start = std::chrono::system_clock::now();
@@ -162,15 +171,15 @@ void doubleSelectionSort(std::vector<T>& a) {
             if (a[i] < a[iMin]) {
                 iMin = i;
             }
-            ::doubleSelectionCounter += 2;
+            ::doubleSelectionCounterComparisons += 2;
         }
         std::swap(a[left], a[iMin]);
-        ++::doubleSelectionCounter;
+        ++::doubleSelectionCounterSwaps;
         if (iMax == left) {
             iMax = iMin;
         }
         std::swap(a[right], a[iMax]);
-        ++::doubleSelectionCounter;
+        ++::doubleSelectionCounterSwaps;
 
         ++left;
         --right;
@@ -181,7 +190,8 @@ void doubleSelectionSort(std::vector<T>& a) {
                     size);
 }
 
-long int mergeCounter = 0;
+long int mergeCounterComparisons = 0;
+long int mergeCounterSwaps = 0;
 template<typename T>
 void mergeSort(std::vector<T>& a, size_t left, size_t right) {
     if (left < right) {
@@ -195,44 +205,45 @@ void mergeSort(std::vector<T>& a, size_t left, size_t right) {
         std::vector<T> rightArray(n2);
         for (size_t i = 0; i != n1; ++i) {
             leftArray[i] = a[left + i];
-            ++::mergeCounter;
+            ++::mergeCounterSwaps;
         }
         for (size_t j = 0; j < n2; ++j) {
             rightArray[j] = a[middle + 1 + j];
-            ++::mergeCounter;
+            ++::mergeCounterSwaps;
         }
         size_t i = 0;
         size_t j = 0;
         size_t k = left;
         while (i < n1 && j < n2) {
-            ++::mergeCounter;
+            ++::mergeCounterComparisons;
             if (leftArray[i] <= rightArray[j]) {
                 a[k] = leftArray[i];
-                ++::mergeCounter;
+                ++::mergeCounterSwaps;
                 i++;
             } else {
                 a[k] = rightArray[j];
-                ++::mergeCounter;
+                ++::mergeCounterSwaps;
                 j++;
             }
             k++;
         }
         while (i < n1) {
             a[k] = leftArray[i];
-            ++::mergeCounter;
+            ++::mergeCounterSwaps;
             i++;
             k++;
         }
         while (j < n2) {
             a[k] = rightArray[j];
-            ++::mergeCounter;
+            ++::mergeCounterSwaps;
             j++;
             k++;
         }
     }
 }
 
-long int quickCounter = 0;
+long int quickCounterComparisons = 0;
+long int quickCounterSwaps = 0;
 template<typename T>
 void quickSort(std::vector<T>& a, int left, int right) {
     if (left < right) {
@@ -241,16 +252,16 @@ void quickSort(std::vector<T>& a, int left, int right) {
 
         for (size_t j = left; j <= right - 1; ++j) {
             // Если текущий элемент меньше или равен опорному
-            ++::quickCounter;
+            ++::quickCounterComparisons;
             if (a[j] <= pivot) {
                 i++; // Увеличиваем индекс меньшего элемента
                 std::swap(a[i], a[j]);
-                ++::quickCounter;
+                ++::quickCounterSwaps;
             }
         }
 
         std::swap(a[i + 1], a[right]);
-        ++::quickCounter;
+        ++::quickCounterSwaps;
         size_t pivotIndex = i + 1;
 
         // Рекурсивно сортируем элементы до и после опорного элемента
@@ -265,7 +276,7 @@ void calculateDurationOfQuickSort(std::vector<T>& list) {
     quickSort<T>(list, 0, list.size() - 1);
     auto end = std::chrono::system_clock::now();
     size_t size = list.size();
-    chronoOutToFile(start, end, "CMakeFiles/data/output.txt", "Merge Sort", size);
+    chronoOutToFile(start, end, "CMakeFiles/data/output.txt", "Quick Sort", size);
 }
 
 template<typename T>
@@ -274,39 +285,48 @@ void calculateDurationOfMergeSort(std::vector<T>& list) {
     mergeSort<T>(list, 0, list.size() - 1);
     auto end = std::chrono::system_clock::now();
     size_t size = list.size();
-    chronoOutToFile(start, end, "CMakeFiles/data/output.txt", "Quick Sort", size);
+    chronoOutToFile(start, end, "CMakeFiles/data/output.txt", "Merge Sort", size);
 }
 
-void printAmountOfSwapsAndCompares() {
+void printAmountOfSwapsAndComparisons() {
     std::ofstream fout("CMakeFiles/data/output.txt", std::ios::app);
-    fout << "The amount of swaps and compares during performing bubbleSort is: "
-              << ::bubbleCounter << '\n';
-    fout << "The amount of swaps and compares during performing selectionSort is: "
-              << ::selectionCounter << '\n';
-    fout << "The amount of swaps and compares during performing insertionSort is: "
-              << ::insertionCounter << '\n';
-    fout << "The amount of swaps and compares during performing shellSort is: "
-              << ::shellCounter << '\n';
-    fout << "The amount of swaps and compares during performing cocktailSort is: "
-              << ::cocktailCounter << '\n';
-    fout << "The amount of swaps and compares during performing combSort is: "
-              << ::combCounter << '\n';
-    fout << "The amount of swaps and compares during performing doubleSelectionSort is: "
-              << ::doubleSelectionCounter << '\n';
-    fout << "The amount of swaps and compares during performing mergeSort is: "
-              << ::mergeCounter << '\n';
-    fout << "The amount of swaps and compares during performing quickSort is: "
-              << ::quickCounter << '\n' << '\n';
+    fout << "The amount of swaps and comparisons during performing bubbleSort is: "
+              << ::bubbleCounterSwaps << " and " << ::bubbleCounterComparisons << '\n';
+    fout << "The amount of swaps and comparisons during performing selectionSort is: "
+              << ::selectionCounterSwaps << " and " << ::selectionCounterComparisons << '\n';
+    fout << "The amount of swaps and comparisons during performing insertionSort is: "
+              << ::insertionCounterSwaps << " and " << ::insertionCounterComparisons <<  '\n';
+    fout << "The amount of swaps and comparisons during performing shellSort is: "
+              << ::shellCounterSwaps << " and " << ::shellCounterComparisons << '\n';
+    fout << "The amount of swaps and comparisons during performing cocktailSort is: "
+              << ::cocktailCounterSwaps << " and " << ::cocktailCounterComparisons << '\n';
+    fout << "The amount of swaps and comparisons during performing combSort is: "
+              << ::combCounterSwaps << " and " << ::combCounterComparisons << '\n';
+    fout << "The amount of swaps and comparisons during performing doubleSelectionSort is: "
+              << ::doubleSelectionCounterSwaps << " and " << ::doubleSelectionCounterComparisons << '\n';
+    fout << "The amount of swaps and comparisons during performing mergeSort is: "
+              << ::mergeCounterSwaps << " and " << ::mergeCounterComparisons << '\n';
+    fout << "The amount of swaps and comparisons during performing quickSort is: "
+              << ::quickCounterSwaps << " and " << ::quickCounterComparisons << '\n' << '\n';
     fout.close();
-    ::bubbleCounter = 0;
-    ::selectionCounter = 0;
-    ::insertionCounter = 0;
-    ::shellCounter = 0;
-    ::cocktailCounter = 0;
-    ::combCounter = 0;
-    ::doubleSelectionCounter = 0;
-    ::mergeCounter = 0;
-    ::quickCounter = 0;
+    ::bubbleCounterSwaps = 0;
+    ::bubbleCounterComparisons = 0;
+    ::selectionCounterSwaps = 0;
+    ::selectionCounterComparisons = 0;
+    ::insertionCounterSwaps = 0;
+    ::insertionCounterComparisons = 0;
+    ::shellCounterSwaps = 0;
+    ::shellCounterComparisons = 0;
+    ::cocktailCounterSwaps = 0;
+    ::cocktailCounterComparisons = 0;
+    ::combCounterSwaps = 0;
+    ::combCounterComparisons = 0;
+    ::doubleSelectionCounterSwaps = 0;
+    ::doubleSelectionCounterComparisons = 0;
+    ::mergeCounterSwaps = 0;
+    ::mergeCounterComparisons = 0;
+    ::quickCounterSwaps = 0;
+    ::quickCounterComparisons = 0;
 }
 
 #endif // SORTING_ALGORITHMS_H_

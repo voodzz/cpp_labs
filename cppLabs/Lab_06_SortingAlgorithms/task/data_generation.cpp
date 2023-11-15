@@ -59,7 +59,7 @@ void performSortingInAscendingOrder() {
         calculateDurationOfMergeSort<int>(list);
         list = unsorted;
         calculateDurationOfQuickSort<int>(list);
-        printAmountOfSwapsAndCompares();
+        printAmountOfSwapsAndComparisons();
     }
 }
 
@@ -87,7 +87,7 @@ void performSortingInDescendingOrder() {
         calculateDurationOfMergeSort<int>(list);
         list = unsorted;
         calculateDurationOfQuickSort<int>(list);
-        printAmountOfSwapsAndCompares();
+        printAmountOfSwapsAndComparisons();
     }
 }
 
@@ -117,6 +117,6 @@ void performSortingOfRandomElements() {
         calculateDurationOfMergeSort<int>(list);
         list = unsorted;
         calculateDurationOfQuickSort<int>(list);
-        printAmountOfSwapsAndCompares();
+        printAmountOfSwapsAndComparisons();
     }
 }

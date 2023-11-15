@@ -5,6 +5,7 @@
 #include <vector>
 #include <chrono>
 #include <ctime>
+#include <fstream>
 #include "iodata.h"
 
 int bubbleCounter = 0;

@@ -1,8 +1,16 @@
 #ifndef IODATA_H_
 #define IODATA_H_
-void outToConsole(const std::vector <int>& vec, const std::string& delimeter);
-void writeData(const std::vector <int>& list, const std::string& filePath);
-std::vector<int> readData(const std::string& filePath);
-void readData1(const std::string& filePath, std::vector<int>& list);
+
+#include <array>
+#include <ctime>
+#include <chrono>
+#include <vector>
+
+void writeInputAscendingDataToFile(const std::vector<int>& list);
+void writeInputDescendingDataToFile(const std::vector<int>& list);
+void writeInputRandomDataToFile(const std::vector<int>& list);
+void chronoOutToFile(std::chrono::time_point<std::chrono::system_clock>& start,
+                     std::chrono::time_point<std::chrono::system_clock>& end,
+                     const std::string& filePath, const std::string& sort, size_t& size);
 
 #endif // IODATA_H_

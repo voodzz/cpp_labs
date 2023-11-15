@@ -3,8 +3,8 @@
 
 #include <string>
 
-std::vector<int> generateDataAscending(size_t amount);
-std::vector<int> generateDataDescending(size_t amount);
-std::vector<int> generateDataRandom(size_t amount, size_t n);
+std::vector<int> generateAndWriteDataAscending(size_t amount);
+std::vector<int> generateAndWriteDataDescending(size_t amount);
+std::vector<int> generateAndWriteDataRandom(size_t amount, size_t n);
 
 #endif //DATA_GENERATION_H_

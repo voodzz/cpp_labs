@@ -8,7 +8,7 @@
 #include <fstream>
 #include "iodata.h"
 
-int bubbleCounter = 0;
+long int bubbleCounter = 0;
 template<typename T>
 void bubbleSort(std::vector<T>& a) {
     auto start = std::chrono::system_clock::now();
@@ -26,7 +26,7 @@ void bubbleSort(std::vector<T>& a) {
     chronoOutToFile(start, end, "CMakeFiles/data/output.txt", "Bubble Sort", size);
 }
 
-int selectionCounter = 0;
+long int selectionCounter = 0;
 template<typename T>
 void selectionSort(std::vector<T>& a) {
     auto start = std::chrono::system_clock::now();
@@ -50,7 +50,7 @@ void selectionSort(std::vector<T>& a) {
     chronoOutToFile(start, end, "CMakeFiles/data/output.txt", "Selection Sort", size);
 }
 
-int insertionCounter = 0;
+long int insertionCounter = 0;
 template<typename T>
 void insertionSort (std::vector<T>& a) {
     auto start = std::chrono::system_clock::now();
@@ -65,7 +65,7 @@ void insertionSort (std::vector<T>& a) {
     chronoOutToFile(start, end, "CMakeFiles/data/output.txt", "Insertion Sort", size);
 }
 
-int shellCounter = 0;
+long int shellCounter = 0;
 template<typename T>
 void shellSort (std::vector<T>& a) {
     auto start = std::chrono::system_clock::now();
@@ -144,7 +144,7 @@ void combSort(std::vector<T>& a) {
     chronoOutToFile(start, end, "CMakeFiles/data/output.txt", "Comb Sort", size);
 }
 
-int doubleSelectionCounter = 0;
+long int doubleSelectionCounter = 0;
 template<typename T>
 void doubleSelectionSort(std::vector<T>& a) {
     auto start = std::chrono::system_clock::now();
@@ -181,7 +181,7 @@ void doubleSelectionSort(std::vector<T>& a) {
                     size);
 }
 
-int mergeCounter = 0;
+long int mergeCounter = 0;
 template<typename T>
 void mergeSort(std::vector<T>& a, size_t left, size_t right) {
     if (left < right) {
@@ -232,7 +232,7 @@ void mergeSort(std::vector<T>& a, size_t left, size_t right) {
     }
 }
 
-int quickCounter = 0;
+long int quickCounter = 0;
 template<typename T>
 void quickSort(std::vector<T>& a, int left, int right) {
     if (left < right) {

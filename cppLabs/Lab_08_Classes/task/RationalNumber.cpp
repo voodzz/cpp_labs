@@ -1,52 +1,90 @@
 #include <numeric>
 #include <stdexcept>
+#include <iostream>
 #include "RationalNumber.h"
 
-RationalNumber::RationalNumber() {
-    this->numerator = 0;
-    this->denominator = 1;
-}
+RationalNumber::RationalNumber(): numerator_(0), denominator_(1) {}
 
-RationalNumber::RationalNumber(int numerator, unsigned int denominator) {
+RationalNumber::RationalNumber(int numerator, unsigned int denominator): numerator_(numerator), denominator_(denominator) {
     if (denominator == 0) {
         throw std::invalid_argument("Denominator can not have the value of 0.");
     }
-    this->numerator = numerator;
-    this->denominator = denominator;
+    if (numerator != 0) {
+        reduce();
+    }
+}
 
-    this->reduce();
+RationalNumber::RationalNumber(const RationalNumber& other): numerator_(other.numerator_), denominator_(other.denominator_) {}
+
+RationalNumber& RationalNumber::operator =(const RationalNumber& other) {
+    if (this == &other) {
+        return *this;
+    }
+    numerator_ = other.numerator_;
+    denominator_ = other.denominator_;
+    return *this;
 }
 
 int RationalNumber::getNumerator() const {
-    return this->numerator;
+    return numerator_;
 }
 
 unsigned int RationalNumber::getDenominator() const {
-    return this->denominator;
+    return denominator_;
 }
 
-void RationalNumber::setNumerator(int newNumerator) {
-    this->numerator = newNumerator;
+void RationalNumber::setNumerator(int numerator) {
+    numerator_ = numerator;
 }
 
-void RationalNumber::setDenominator(unsigned int newDenominator) {
-    if (newDenominator == 0) {
+void RationalNumber::setDenominator(unsigned int denominator) {
+    if (denominator == 0) {
         throw std::invalid_argument("Denominator can not have the value of 0.");
     }
-    this->denominator = newDenominator;
+    denominator_ = denominator;
 }
 
 std::string RationalNumber::toString() const {
-    std::string result = std::to_string(this->numerator) + '/' + std::to_string(this->denominator);
-    return result;
+    return std::to_string(numerator_) + '/' + std::to_string(denominator_);
 }
 
-RationalNumber RationalNumber::Sum(const RationalNumber& other) const {
-    unsigned int denominator1 = this->getDenominator();
-    unsigned int denominator2 = other.getDenominator();
+RationalNumber RationalNumber::sum(const RationalNumber& other) const {
+    return *this + other;
+}
 
-    int numerator1 = this->getNumerator();
-    int numerator2 = other.getNumerator();
+RationalNumber RationalNumber::subtraction(const RationalNumber& other) const {
+    return *this - other;
+}
+
+RationalNumber RationalNumber::division(const RationalNumber& other) const {
+    return *this / other;
+}
+
+RationalNumber RationalNumber::multiplication(const RationalNumber& other) const {
+    return *this * other;
+}
+
+void RationalNumber::reduce() {
+    int tmpNumerator = numerator_;
+    unsigned int tmpDenominator = denominator_;
+
+    int gcd = std::gcd(tmpNumerator, tmpDenominator);
+
+    numerator_ = tmpNumerator / gcd;
+    denominator_ = tmpDenominator / gcd;
+}
+
+RationalNumber RationalNumber::operator +() {
+    this->reduce();
+    return *this;
+}
+
+RationalNumber RationalNumber::operator +(const RationalNumber& other) const {
+    unsigned int denominator1 = denominator_;
+    unsigned int denominator2 = other.denominator_;
+
+    int numerator1 = numerator_;
+    int numerator2 = other.numerator_;
 
     unsigned int commonDenominator = std::lcm(denominator1, denominator2);
 
@@ -54,15 +92,26 @@ RationalNumber RationalNumber::Sum(const RationalNumber& other) const {
 
     RationalNumber result(commonNumerator, commonDenominator);
     result.reduce();
-    return result;
+    return result; // return *this + other;
 }
 
-RationalNumber RationalNumber::Subtraction(const RationalNumber& other) const {
-    unsigned int denominator1 = this->getDenominator();
-    unsigned int denominator2 = other.getDenominator();
+RationalNumber RationalNumber::operator+(int number) const {
+    RationalNumber other(number, 1);
+    return *this + other;
+}
 
-    int numerator1 = this->getNumerator();
-    int numerator2 = other.getNumerator();
+RationalNumber RationalNumber::operator -() const {
+    RationalNumber tmp = *this;
+    tmp.numerator_ *= -1;
+    return tmp;
+}
+
+RationalNumber RationalNumber::operator -(const RationalNumber& other) const {
+    unsigned int denominator1 = denominator_;
+    unsigned int denominator2 = other.denominator_;
+
+    int numerator1 = numerator_;
+    int numerator2 = other.numerator_;
 
     unsigned int commonDenominator = std::lcm(denominator1, denominator2);
 
@@ -73,12 +122,37 @@ RationalNumber RationalNumber::Subtraction(const RationalNumber& other) const {
     return result;
 }
 
-RationalNumber RationalNumber::Division(const RationalNumber& other) const {
-    unsigned int denominator1 = this->getDenominator();
-    unsigned int denominator2 = other.getDenominator();
+RationalNumber RationalNumber::operator-(int number) const {
+    RationalNumber other(number, 1);
+    return *this - other;
+}
 
-    int numerator1 = this->getNumerator();
-    int numerator2 = other.getNumerator();
+RationalNumber RationalNumber::operator *(const RationalNumber& other) const {
+    unsigned int denominator1 = denominator_;
+    unsigned int denominator2 = other.denominator_;
+
+    int numerator1 = numerator_;
+    int numerator2 = other.numerator_;
+
+    RationalNumber result(numerator1 * numerator2, denominator1 * denominator2);
+    result.reduce();
+    return result;
+}
+
+RationalNumber RationalNumber::operator*(int number) const {
+    RationalNumber other(number, 1);
+    return *this * other;
+}
+
+RationalNumber RationalNumber::operator /(const RationalNumber& other) const {
+    if (other.numerator_ == 0) {
+        throw std::invalid_argument("You can not divide by 0.");
+    }
+    unsigned int denominator1 = denominator_;
+    unsigned int denominator2 = other.denominator_;
+
+    int numerator1 = numerator_;
+    int numerator2 = other.numerator_;
 
     int newNumerator = numerator1 * denominator2;
     int newDenominator = denominator1 * numerator2;
@@ -92,76 +166,9 @@ RationalNumber RationalNumber::Division(const RationalNumber& other) const {
     return result;
 }
 
-RationalNumber RationalNumber::Multiplication(const RationalNumber& other) const {
-    unsigned int denominator1 = this->getDenominator();
-    unsigned int denominator2 = other.getDenominator();
-
-    int numerator1 = this->getNumerator();
-    int numerator2 = other.getNumerator();
-
-    RationalNumber result(numerator1 * numerator2, denominator1 * denominator2);
-    result.reduce();
-    return result;
-}
-
-void RationalNumber::reduce() {
-    int tmpNumerator = this->getNumerator();
-    unsigned int tmpDenominator = this->getDenominator();
-
-    int gcd = std::gcd(tmpNumerator, tmpDenominator);
-
-    this->setNumerator(tmpNumerator / gcd);
-    this->setDenominator(tmpDenominator / gcd);
-}
-
-RationalNumber RationalNumber::operator +() {
-    this->reduce();
-    return *this;
-}
-
-RationalNumber RationalNumber::operator +(const RationalNumber& other) const {
-    RationalNumber tmp;
-    tmp = this->Sum(other);
-    tmp.reduce();
-    return tmp;
-}
-
-RationalNumber RationalNumber::operator -() {
-    this->numerator *= -1;
-    return *this;
-}
-
-RationalNumber RationalNumber::operator -(const RationalNumber& other) const {
-    RationalNumber tmp;
-    tmp = this->Subtraction(other);
-    tmp.reduce();
-    return tmp;
-}
-
-RationalNumber RationalNumber::operator *(const RationalNumber& other) const {
-    RationalNumber tmp;
-    tmp = this->Multiplication(other);
-    tmp.reduce();
-    return tmp;
-}
-
-RationalNumber RationalNumber::operator /(const RationalNumber& other) const {
-    if (other.getNumerator() == 0) {
-        throw std::invalid_argument("You can not divide by 0.");
-    }
-    RationalNumber tmp;
-    tmp = this->Division(other);
-    tmp.reduce();
-    return tmp;
-}
-
-RationalNumber& RationalNumber::operator =(const RationalNumber& other) {
-    if (this == &other) {
-        return *this;
-    }
-    this->numerator = other.getNumerator();
-    this->denominator = other.denominator;
-    return *this;
+RationalNumber RationalNumber::operator/(int number) const {
+    RationalNumber other(number, 1);
+    return *this / other;
 }
 
 RationalNumber& RationalNumber::operator +=(const RationalNumber& other) {
@@ -185,22 +192,22 @@ RationalNumber& RationalNumber::operator /=(const RationalNumber& other) {
 }
 
 bool RationalNumber::operator ==(const RationalNumber& other) const {
-    return (this->numerator == other.getNumerator() && this->denominator == other.getDenominator());
+    return (numerator_ == other.numerator_ && denominator_ == other.denominator_);
 }
 
 bool RationalNumber::operator !=(const RationalNumber& other) const {
-    //return (this->numerator != other.getNumerator() || this->denominator != other.getDenominator());
+    //return (this->numerator_ != other.getNumerator() || this->denominator_ != other.getDenominator());
     return !(*this == other);
 }
 
 bool RationalNumber::operator <(const RationalNumber& other) const {
     RationalNumber tmp = *this - other;
-    return (tmp.numerator < 0);
+    return (tmp.numerator_ < 0);
 }
 
 bool RationalNumber::operator >(const RationalNumber& other) const {
     RationalNumber tmp = *this - other;
-    return (tmp.numerator > 0);
+    return (tmp.numerator_ > 0);
 }
 
 bool RationalNumber::operator<=(const RationalNumber& other) const {
@@ -217,21 +224,36 @@ RationalNumber& RationalNumber::operator++() {
     return *this;
 }
 
+// postfix
+RationalNumber RationalNumber::operator++(int tmp) {
+    RationalNumber old = *this;
+    ++*this;
+    return old;
+}
+
+// prefix
 RationalNumber& RationalNumber::operator--() {
     *this -= RationalNumber(1, 1);
     return *this;
 }
 
 // postfix
-RationalNumber RationalNumber::operator++(int) {
-    RationalNumber old = *this;
-    ++*this;
-    return old;
-}
-
-RationalNumber RationalNumber::operator--(int) {
+RationalNumber RationalNumber::operator--(int tmp) {
     RationalNumber old = *this;
     --*this;
     return old;
 }
 
+std::ostream& operator <<(std::ostream& os, const RationalNumber& number) {
+    //os << number.getNumerator() << "/" << number.getDenominator();
+    os << number.numerator_ << "/" << number.denominator_;
+    return os;
+}
+
+RationalNumber operator+(int number, const RationalNumber& other) {
+    return other + number;
+}
+
+RationalNumber operator-(int number, const RationalNumber& other) {
+    return number + (-other);
+}

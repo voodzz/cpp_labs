@@ -8,22 +8,31 @@ public:
     RationalNumber();
     RationalNumber(int, unsigned int);
 
-    [[nodiscard]] int getNumerator() const;
-    [[nodiscard]] unsigned int getDenominator() const;
+    RationalNumber(const RationalNumber&);
+    RationalNumber& operator =(const RationalNumber& other);
 
+    ~RationalNumber() = default;
+    [[nodiscard]] int getNumerator() const;
+
+    [[nodiscard]] unsigned int getDenominator() const;
     void setNumerator(int);
+
     void setDenominator(unsigned int);
 
     RationalNumber operator +();
     RationalNumber operator +(const RationalNumber& other) const;
+    RationalNumber operator +(int) const;
 
-    RationalNumber operator -();
+    RationalNumber operator -() const;
     RationalNumber operator -(const RationalNumber& other) const;
+    RationalNumber operator -(int number) const;
 
     RationalNumber operator *(const RationalNumber& other) const;
-    RationalNumber operator /(const RationalNumber& other) const;
+    RationalNumber operator *(int number) const;
 
-    RationalNumber& operator =(const RationalNumber& other);
+    RationalNumber operator /(const RationalNumber& other) const;
+    RationalNumber operator /(int number) const;
+
     RationalNumber& operator +=(const RationalNumber& other);
     RationalNumber& operator -=(const RationalNumber& other);
     RationalNumber& operator *=(const RationalNumber& other);
@@ -44,20 +53,26 @@ public:
     RationalNumber operator ++(int);
     RationalNumber operator --(int);
 
-
-
-    [[nodiscard]] RationalNumber Sum(const RationalNumber& other) const;
-    [[nodiscard]] RationalNumber Subtraction(const RationalNumber& other) const;
-    [[nodiscard]] RationalNumber Division(const RationalNumber& other) const;
-    [[nodiscard]] RationalNumber Multiplication(const RationalNumber& other) const;
+    [[nodiscard]] RationalNumber sum(const RationalNumber& other) const;
+    [[nodiscard]] RationalNumber subtraction(const RationalNumber& other) const;
+    [[nodiscard]] RationalNumber division(const RationalNumber& other) const;
+    [[nodiscard]] RationalNumber multiplication(const RationalNumber& other) const;
 
     [[nodiscard]] std::string toString() const;
 
 private:
-    int numerator;
-    unsigned int denominator;
+
+    int numerator_;
+    unsigned int denominator_;
 
     void reduce();
+
+    friend std::ostream& operator <<(std::ostream& os, const RationalNumber& number);
 };
+
+std::ostream& operator <<(std::ostream& os, const RationalNumber& number);
+
+RationalNumber operator +(int, const RationalNumber&);
+RationalNumber operator -(int, const RationalNumber&);
 
 #endif //TASK_RATIONALNUMBER_H

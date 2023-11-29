@@ -39,11 +39,17 @@ public:
     RationalNumber& operator /=(const RationalNumber& other);
 
     bool operator ==(const RationalNumber& other) const;
+    bool operator ==(int number) const;
     bool operator !=(const RationalNumber& other) const;
+    bool operator !=(int number) const;
     bool operator <(const RationalNumber& other) const;
+    bool operator <(int number) const;
     bool operator >(const RationalNumber& other) const;
+    bool operator >(int number) const;
     bool operator <=(const RationalNumber& other) const;
+    bool operator <=(int number) const;
     bool operator >=(const RationalNumber& other) const;
+    bool operator >=(int number) const;
 
     // prefix
     RationalNumber& operator ++();
@@ -68,11 +74,30 @@ private:
     void reduce();
 
     friend std::ostream& operator <<(std::ostream& os, const RationalNumber& number);
+    friend RationalNumber operator +(int, const RationalNumber&);
+    friend RationalNumber operator -(int, const RationalNumber&);
+    friend RationalNumber operator *(int, const RationalNumber&);
+    friend RationalNumber operator /(int, const RationalNumber&);
+    friend bool operator ==(int number, const RationalNumber& other);
+    friend bool operator !=(int number, const RationalNumber& other);
+    friend bool operator <(int number, const RationalNumber& other);
+    friend bool operator >(int number, const RationalNumber& other);
+    friend bool operator <=(int number, const RationalNumber& other);
+    friend bool operator >=(int number, const RationalNumber& other);
 };
 
 std::ostream& operator <<(std::ostream& os, const RationalNumber& number);
 
 RationalNumber operator +(int, const RationalNumber&);
 RationalNumber operator -(int, const RationalNumber&);
+RationalNumber operator *(int, const RationalNumber&);
+RationalNumber operator /(int, const RationalNumber&);
+
+bool operator ==(int number, const RationalNumber& other);
+bool operator !=(int number, const RationalNumber& other);
+bool operator <(int number, const RationalNumber& other);
+bool operator >(int number, const RationalNumber& other);
+bool operator <=(int number, const RationalNumber& other);
+bool operator >=(int number, const RationalNumber& other);
 
 #endif //TASK_RATIONALNUMBER_H

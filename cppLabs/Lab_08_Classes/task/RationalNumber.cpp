@@ -195,12 +195,28 @@ bool RationalNumber::operator ==(const RationalNumber& other) const {
     return (numerator_ == other.numerator_ && denominator_ == other.denominator_);
 }
 
+bool RationalNumber::operator ==(int number) const {
+    RationalNumber other(number, 1);
+    return (numerator_ == other.numerator_ && denominator_ == other.denominator_);
+}
+
 bool RationalNumber::operator !=(const RationalNumber& other) const {
     //return (this->numerator_ != other.getNumerator() || this->denominator_ != other.getDenominator());
     return !(*this == other);
 }
 
+bool RationalNumber::operator!=(int number) const {
+    RationalNumber other(number, 1);
+    return !(*this == other);
+}
+
 bool RationalNumber::operator <(const RationalNumber& other) const {
+    RationalNumber tmp = *this - other;
+    return (tmp.numerator_ < 0);
+}
+
+bool RationalNumber::operator<(int number) const {
+    RationalNumber other(number, 1);
     RationalNumber tmp = *this - other;
     return (tmp.numerator_ < 0);
 }
@@ -210,11 +226,27 @@ bool RationalNumber::operator >(const RationalNumber& other) const {
     return (tmp.numerator_ > 0);
 }
 
+bool RationalNumber::operator>(int number) const {
+    RationalNumber other(number, 1);
+    RationalNumber tmp = *this - other;
+    return (tmp.numerator_ > 0);
+}
+
 bool RationalNumber::operator<=(const RationalNumber& other) const {
     return !(*this > other);
 }
 
+bool RationalNumber::operator<=(int number) const {
+    RationalNumber other(number, 1);
+    return !(*this > other);
+}
+
 bool RationalNumber::operator>=(const RationalNumber& other) const {
+    return !(*this < other);
+}
+
+bool RationalNumber::operator>=(int number) const {
+    RationalNumber other(number, 1);
     return !(*this < other);
 }
 
@@ -256,4 +288,46 @@ RationalNumber operator+(int number, const RationalNumber& other) {
 
 RationalNumber operator-(int number, const RationalNumber& other) {
     return number + (-other);
+}
+
+RationalNumber operator*(int number, const RationalNumber& other) {
+    RationalNumber rationalNumber(number, 1);
+    return rationalNumber * other;
+}
+
+RationalNumber operator/(int number, const RationalNumber& other) {
+    RationalNumber rationalNumber(number, 1);
+    return rationalNumber / other;
+}
+
+bool operator==(int number, const RationalNumber& other) {
+    RationalNumber rationalNumber(number, 1);
+    return (rationalNumber.numerator_ == other.numerator_ && rationalNumber.denominator_ == other.denominator_);
+}
+
+bool operator!=(int number, const RationalNumber& other) {
+    RationalNumber rationalNumber(number, 1);
+    return !(rationalNumber == other);
+}
+
+bool operator<(int number, const RationalNumber& other) {
+    RationalNumber rationalNumber(number, 1);
+    RationalNumber tmp = rationalNumber - other;
+    return (tmp.numerator_ < 0);
+}
+
+bool operator>(int number, const RationalNumber& other) {
+    RationalNumber rationalNumber(number, 1);
+    RationalNumber tmp = rationalNumber - other;
+    return (tmp.numerator_ > 0);
+}
+
+bool operator<=(int number, const RationalNumber& other) {
+    RationalNumber rationalNumber(number, 1);
+    return !(rationalNumber > other);
+}
+
+bool operator>=(int number, const RationalNumber& other) {
+    RationalNumber rationalNumber(number, 1);
+    return !(rationalNumber < other);
 }

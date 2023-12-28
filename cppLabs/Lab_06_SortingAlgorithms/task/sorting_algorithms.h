@@ -52,6 +52,15 @@ void selectionSort(std::vector<T>& a) {
     chronoOutToFile(start, end, "CMakeFiles/data/output.txt", "Selection Sort", size);
 }
 
+/*Another version for SelectionSort:
+ *
+ * void SelectionSort(std::vector<T>& values) {
+  for (auto i = values.begin(); i != values.end(); ++i) {
+    auto j = std::min_element(i, values.end());
+    swap(*i, *j);
+  }
+}*/
+
 long int insertionCounterComparisons = 0;
 long int insertionCounterSwaps = 0;
 template<typename T>

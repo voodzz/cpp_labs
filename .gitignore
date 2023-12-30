@@ -90,6 +90,9 @@ StyleCopReport.xml
 *.vcxproj
 *.sln
 
+# Side directories
+spdlog
+
 # CLion files
 cmake-build-debug
 .idea/*

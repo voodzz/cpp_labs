@@ -92,6 +92,7 @@ StyleCopReport.xml
 
 # Side directories
 spdlog
+*.zip
 
 # CLion files
 cmake-build-debug

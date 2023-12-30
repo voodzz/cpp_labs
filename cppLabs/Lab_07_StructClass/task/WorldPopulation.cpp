@@ -11,11 +11,9 @@ void WorldPopulation::readCountryPopulationFromFile(const std::string& file) {
     if (!fin) {
         throw std::invalid_argument ("File doesn't exist");
     }
-    int count = 0;
     while (!fin.eof()) {
         /*std::cout << count++ << "\n";*/
         getline(fin, str);
-        std::cout << str << '\n';
         if (!str.empty()) {
             list.push_back(str);
         }
@@ -26,7 +24,6 @@ void WorldPopulation::readCountryPopulationFromFile(const std::string& file) {
     //string parcing
     //first string contains the names of columns of data
     std::stringstream ss(list.at(0));
-    std::cout << list.at(0);
     getline(ss, str, ';');
     if (str != "Country Name") {
         throw std::invalid_argument("File contains wrong data");
@@ -42,20 +39,21 @@ void WorldPopulation::readCountryPopulationFromFile(const std::string& file) {
         //read a year and ";" sign
         ss >> year >> ch;
         years.push_back(year);
-        yearPopulation[year] = 0; //world population this year
+        yearPopulation[year] = 0; //overall world pupulation
     }
     //get data about each country
-    long long int population;
+    long long population;
     for (size_t i = 1; i < list.size(); ++i) {
         std::stringstream ssCountry(list.at(i));
         Country country;
         getline(ssCountry, country.name, ';');
         getline(ssCountry, country.code, ';');
         int count = 0;
-        while (ssCountry >> population >> ch) {
+        while (!ssCountry.eof()) {
             std::string tmp;
             getline(ssCountry, tmp, ';');
-            if (!tmp.empty()) {
+            if (!tmp.empty() || tmp != "\0" || tmp != "\n")  {
+                std::cout << tmp << "here\n";
                 population = std::stoll(tmp);
             }
             else {
@@ -74,6 +72,8 @@ void WorldPopulation::readCountryPopulationFromFile(const std::string& file) {
         countries.push_back(country);
     }
 }
+
+
 
 void WorldPopulation::writeDataAmount(const std::string& filePath) {
     std::ofstream fout(filePath, std::ios::out);

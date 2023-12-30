@@ -1,12 +1,12 @@
 #pragma once
+#include "CountryFeature.h"
 #include <map>
 #include <string>
-#include <vector>
 
-class Country {
+class WorldCountry {
 public:
-    std::string toString() const;
+    WorldCountry();
     std::string name;
-    std::string code;
+    CountryFeature feature;
     std::map<int, int64_t> yearPopulation;
 };

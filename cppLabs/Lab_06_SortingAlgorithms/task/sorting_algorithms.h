@@ -53,7 +53,6 @@ void selectionSort(std::vector<T>& a) {
 }
 
 /*Another version for SelectionSort:
- *
  * void SelectionSort(std::vector<T>& values) {
   for (auto i = values.begin(); i != values.end(); ++i) {
     auto j = std::min_element(i, values.end());
@@ -108,13 +107,15 @@ void cocktailSort(std::vector<T>& a) {
     auto start = std::chrono::system_clock::now();
     size_t left = 0;
     size_t right = a.size() - 1;
+    size_t lastSwap = right;
     bool isSorted = false;
     while (!isSorted) {
         isSorted = true;
-        for (size_t i = left; i != right; ++i) {
+        for (size_t i = left; i < right; ++i) {
             ++::cocktailCounterComparisons;
             if (a[i] > a[i + 1]){
                 std::swap(a[i], a[i + 1]);
+                lastSwap = i;
                 ++::cocktailCounterSwaps;
                 isSorted = false;
             }
@@ -122,12 +123,12 @@ void cocktailSort(std::vector<T>& a) {
         if (isSorted) {
             break;
         }
-        right--;
+        right = lastSwap;
         isSorted = true;
-        for (size_t i = right - 1; i != left - 1; --i) {
+        for (size_t i = right - 1; i > left; --i) {
             ++::cocktailCounterComparisons;
-            if (a[i] > a[i + 1]) {
-                std::swap(a[i], a[i + 1]);
+            if (a[i - 1] > a[i]) {
+                std::swap(a[i - 1], a[i]);
                 ++cocktailCounterSwaps;
                 isSorted = false;
             }

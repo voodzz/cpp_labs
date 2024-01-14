@@ -65,7 +65,7 @@ public:
         return *this;
     }
 
-    Array<T>(Array<T>&& other) noexcept: size(other.size()), valueList(other.valueList) {
+    Array<T>(Array<T>&& other) noexcept {
         size = other.size();
         valueList = other.valueList;
         other.size = 0;

@@ -2,6 +2,7 @@
 #ifndef DEMOMATRIX_SRC_MATRIX_H_
 #define DEMOMATRIX_SRC_MATRIX_H_
 
+
 template<class T>
 class Matrix {
 public:
@@ -17,22 +18,23 @@ public:
     Matrix<T>& operator =(const Matrix<T>& other);
     Matrix<T>& operator =(Matrix<T>&& other) noexcept ;
 
-    size_t GetN();
-    size_t GetM();
-    T **GetA();
+    size_t getN() const;
+    size_t getM() const;
+    T **getA() const;
 
-    Matrix<T> operator +(const Matrix<T>& other);
-    Matrix<T> operator -(const Matrix<T>& other);
-    Matrix<T> operator *(const T& scalar);
-    Matrix<T> operator /(const T& scalar);
+    Matrix<T> operator +(const Matrix<T>& other) const;
+    Matrix<T> operator -(const Matrix<T>& other) const;
+    Matrix<T> operator *(const T& scalar) const;
+    Matrix<T> operator /(const T& scalar) const;
 
     Matrix<T>& operator +=(const Matrix<T>& other);
     Matrix<T>& operator -=(const Matrix<T>& other);
     Matrix<T>& operator *=(const T& scalar);
     Matrix<T>& operator /=(const T& scalar);
 
-    bool operator ==(const Matrix<T>& other);
-    bool operator !=(const Matrix<T>& other);
+    bool operator ==(const Matrix<T>& other) const;
+    bool operator !=(const Matrix<T>& other) const;
+    T* operator[](size_t index) const;
 private:
     T **a_;
     size_t m_;
@@ -188,22 +190,22 @@ Matrix<T>& Matrix<T>::operator=(Matrix<T>&& other) noexcept {
 }
 
 template<class T>
-size_t Matrix<T>::GetN() {
+size_t Matrix<T>::getN() const {
     return n_;
 }
 
 template<class T>
-size_t Matrix<T>::GetM() {
+size_t Matrix<T>::getM() const {
     return m_;
 }
 
 template<class T>
-T** Matrix<T>::GetA() {
+T** Matrix<T>::getA() const {
     return a_;
 }
 
 template<class T>
-Matrix<T> Matrix<T>::operator+(const Matrix<T>& other) {
+Matrix<T> Matrix<T>::operator+(const Matrix<T>& other) const {
     if (n_ != other.n_ || m_ != other.m_) {
         throw std::runtime_error("The matrices are of different sizes, therefore we can not sum them up.");
     }
@@ -216,7 +218,7 @@ Matrix<T> Matrix<T>::operator+(const Matrix<T>& other) {
 }
 
 template<class T>
-Matrix<T> Matrix<T>::operator-(const Matrix<T>& other) {
+Matrix<T> Matrix<T>::operator-(const Matrix<T>& other) const {
     if (n_ != other.n_ || m_ != other.m_) {
         throw std::runtime_error("The matrices are of different sizes, therefore we can not find their difference.");
     }
@@ -229,7 +231,7 @@ Matrix<T> Matrix<T>::operator-(const Matrix<T>& other) {
 }
 
 template<class T>
-Matrix<T> Matrix<T>::operator*(const T& scalar) {
+Matrix<T> Matrix<T>::operator*(const T& scalar) const {
     for (size_t i = 0; i < m_; ++i) {
         for (size_t j = 0; j < n_; ++j) {
             a_[i][j] *= scalar;
@@ -239,7 +241,7 @@ Matrix<T> Matrix<T>::operator*(const T& scalar) {
 }
 
 template<class T>
-Matrix<T> Matrix<T>::operator/(const T& scalar) {
+Matrix<T> Matrix<T>::operator/(const T& scalar) const {
     for (size_t i = 0; i < m_; ++i) {
         for (size_t j = 0; j < n_; ++j) {
             a_[i][j] /= scalar;
@@ -269,7 +271,7 @@ Matrix<T>& Matrix<T>::operator/=(const T& scalar) {
 }
 
 template<class T>
-bool Matrix<T>::operator ==(const Matrix<T>& other) {
+bool Matrix<T>::operator ==(const Matrix<T>& other) const {
     if (m_ != other.m_ || n_ != other.n_) {
         return false;
     }
@@ -284,8 +286,13 @@ bool Matrix<T>::operator ==(const Matrix<T>& other) {
 }
 
 template<class T>
-bool Matrix<T>::operator !=(const Matrix<T>& other) {
+bool Matrix<T>::operator !=(const Matrix<T>& other) const {
     return !(*this == other);
+}
+
+template<class T>
+T *Matrix<T>::operator[](size_t index) const {
+    return a_[index];
 }
 
 template<class T>

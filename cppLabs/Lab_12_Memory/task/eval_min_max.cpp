@@ -6,8 +6,7 @@ int evalMinMaxExpression(const std::string& expression) {
     StackOnList<int> stack;
     std::string elementaryExpression;
     for (size_t i = expression.size(); i > 0; --i) {
-        if (expression[i - 1] == ')' || expression[i - 1] == '(' || expression[i - 1] == ' '
-            || expression[i - 1] == ',') {
+        if (expression[i - 1] == ')' || expression[i - 1] == '(' || expression[i - 1] == ' ' || expression[i - 1] == ',') {
             if (elementaryExpression.empty()) {
                 continue;
             }

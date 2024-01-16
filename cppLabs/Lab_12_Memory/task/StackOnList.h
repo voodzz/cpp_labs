@@ -14,9 +14,9 @@ public:
         }
     }
 
-    StackOnList(const std::initializer_list<T>);
+    StackOnList(std::initializer_list<T>);
     StackOnList(const StackOnList<T>&);
-    StackOnList(StackOnList<T>&&);
+    StackOnList(StackOnList<T>&&) noexcept ;
     bool isEmpty() const;
     size_t size() const;
     void push(const T& element);
@@ -25,23 +25,17 @@ public:
     T pop();
 
     StackOnList& operator=(const StackOnList<T>&);
-    StackOnList& operator=(StackOnList<T>&&);
+    StackOnList& operator=(StackOnList<T>&&) noexcept ;
 
 private:
     class Node {
     public:
         T value;
-
-        Node() : next_(nullptr) { }
-
-        Node(T newValue, Node* nextNode = nullptr) : value(newValue), next_(nextNode) { }
-
+        Node() : next_(nullptr) {}
+        Node(T newValue, Node* nextNode = nullptr) : value(newValue), next_(nextNode) {}
         ~Node() = default;
-
         void setNextNode(Node* nextNode) { next_ = nextNode; }
-
         Node* getNextNode() const { return next_; }
-
     private:
         Node* next_;
     };
@@ -103,7 +97,7 @@ T StackOnList<T>::pop() {
     return poppedValue;
 }
 
-template<typename T> // todo
+template<typename T>
 StackOnList<T>::StackOnList(const StackOnList<T>& other) {
     auto* current = other.top_;
     top_ = new Node(current->value, nullptr);
@@ -148,7 +142,7 @@ void StackOnList<T>::clearStack() {
 }
 
 template<typename T>
-StackOnList<T>::StackOnList(StackOnList<T>&& other) {
+StackOnList<T>::StackOnList(StackOnList<T>&& other) noexcept {
     top_ = other.top_;
     size_ = other.size_;
     other.top_ = nullptr;
@@ -156,7 +150,7 @@ StackOnList<T>::StackOnList(StackOnList<T>&& other) {
 }
 
 template<typename T>
-StackOnList<T>& StackOnList<T>::operator=(StackOnList<T>&& other) {
+StackOnList<T>& StackOnList<T>::operator=(StackOnList<T>&& other) noexcept {
     if (other.top_ == top_) {
         return *this;
     }

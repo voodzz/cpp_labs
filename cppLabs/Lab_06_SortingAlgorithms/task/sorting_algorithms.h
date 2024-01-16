@@ -107,33 +107,27 @@ void cocktailSort(std::vector<T>& a) {
     auto start = std::chrono::system_clock::now();
     size_t left = 0;
     size_t right = a.size() - 1;
-    size_t lastSwap = right;
-    bool isSorted = false;
-    while (!isSorted) {
-        isSorted = true;
+    size_t lastSwap;
+    while (left <= right) {
+        lastSwap = left;
         for (size_t i = left; i < right; ++i) {
             ++::cocktailCounterComparisons;
             if (a[i] > a[i + 1]){
                 std::swap(a[i], a[i + 1]);
                 lastSwap = i;
                 ++::cocktailCounterSwaps;
-                isSorted = false;
             }
         }
-        if (isSorted) {
-            break;
-        }
         right = lastSwap;
-        isSorted = true;
+        lastSwap = right;
         for (size_t i = right - 1; i > left; --i) {
             ++::cocktailCounterComparisons;
             if (a[i - 1] > a[i]) {
                 std::swap(a[i - 1], a[i]);
                 ++cocktailCounterSwaps;
-                isSorted = false;
             }
         }
-        left++;
+        left = lastSwap + 1;
     }
     auto end = std::chrono::system_clock::now();
     size_t size = a.size();

@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef TASK_EVAL_EXPRESSION_H
+#define TASK_EVAL_EXPRESSION_H
+
 #include <map>
 #include <string>
 #include <vector>
@@ -11,3 +14,5 @@ const std::map<std::string, int> PRIORITY{{"|", 0},  {"^", 1}, {"&", 2},  {">>",
 std::vector<std::string> convertToPolish(const std::vector<std::string>&);
 std::vector<std::string> parseTokens(const std::string&);
 int evaluateExpression(const std::string&);
+
+#endif //TASK_EVAL_EXPRESSION_H

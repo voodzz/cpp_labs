@@ -1,6 +1,5 @@
 #include "eval_expression.h"
 #include "eval_min_max.h"
-
 #include <gtest/gtest.h>
 
 TEST(Public, EvalMinMax) {

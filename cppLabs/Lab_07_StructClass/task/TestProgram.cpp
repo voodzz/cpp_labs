@@ -14,7 +14,7 @@ TEST(Country, ToString) {
 // Part 1
 TEST(WorldPopulation, Reading) {
     Program program;
-    program.readCountryPopulationFromFile("cmake-build-debugCMakeFiles/data/world_population_1960-2018.csv", ';');
+    program.readCountryPopulationFromFile("CMakeFiles/data/world_population_1960-2018.csv", ';');
     program.worldCountries.calcWorldPopulation();
     EXPECT_EQ(program.worldCountries.countries.size(), 217);
 }
@@ -23,8 +23,7 @@ TEST(WorldPopulation, Reading) {
 TEST(WorldCountries, Reading) {
     Program program;
     program.readWorldCountriesFromFile(
-        "cmake-build-debug/CMakeFiles/data/countries.csv", "cmake-build-debug/CMakeFiles/data/world_population_1960-2018.csv", ';'
-    );
+        "CMakeFiles/data/countries.csv", "CMakeFiles/data/world_population_1960-2018.csv", ';');
     program.worldCountries.calcWorldPopulation();
     EXPECT_EQ(program.worldCountries.countries.size(), 217);
     ASSERT_EQ(program.worldCountries.countries[0].name, "Afghanistan");

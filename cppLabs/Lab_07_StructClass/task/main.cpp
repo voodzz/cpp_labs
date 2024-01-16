@@ -1,5 +1,4 @@
-#include <iostream>
-#include "ProgramCountiresPopulation.h"
+#include "ProgramCountriesPopulation.h"
 
 int main() {
     return ProgramCountriesPopulation::main();

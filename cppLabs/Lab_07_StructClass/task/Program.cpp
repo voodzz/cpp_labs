@@ -3,7 +3,7 @@
 #include <sstream>
 
 void Program::readCountryPopulationFromFile(const std::string& file, char delimiter) {
-    std::ifstream fin(file, std::ios_base::in);
+    std::ifstream fin(file, std::ios::in);
     std::stringstream sin1;
     if (fin.is_open()) {
         std::string line;
@@ -47,7 +47,7 @@ void Program::readCountryPopulationFromFile(const std::string& file, char delimi
 std::map<std::string, CountryFeature>
 Program::readCountryFeaturesFromFile(const std::string& file, char delimiter) {
     std::map<std::string, CountryFeature> result;
-    std::fstream fin(file, std::ios_base::in);
+    std::fstream fin(file, std::ios::in);
     if (fin.is_open()) {
         std::string firstLine;
         std::getline(fin, firstLine);

@@ -4,7 +4,6 @@
 class ProgramCountriesPopulation {
 public:
     static int main();
-
 };
 
 #endif //LAB_07_STRUCTCLASS_PROGRAMCOUNTIRESPOPULATION_H
